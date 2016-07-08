@@ -8,7 +8,19 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+  <nav>
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to "Contests", contests_path %></li>
+      <li><%= link_to "Wines", wines_path %></li>
+      <li><%= link_to "Grapes", grapes_path %></li>
+    </ul>
+  </nav>
+</div>
+
+<div class="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>

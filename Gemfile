@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.1.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -58,3 +59,6 @@ gem 'pg'
 gem 'devise-bootstrap-views'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootswatch-rails'
+
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'

@@ -15,7 +15,22 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= f.label :starts_in %><br>
+    <div class='input-group date' id='datetimepicker'>
+      <%= f.text_field :starts_in, :class => 'form-control' %>
+      <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Salvar', :class => 'btn btn-default' %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker').datetimepicker();
+    });
+</script>

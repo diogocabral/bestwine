@@ -16,6 +16,14 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :year %><br>
+    <%= f.text_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :grape %>
+    <%= f.collection_select(:grape_id, Grape.order(:name).all, :id, :name, {:prompt => 'Select'}) %>
+  </div>
+  <div class="field">
     <%= f.label :vivino_score %><br>
     <%= f.text_field :vivino_score %>
   </div>
@@ -28,6 +36,6 @@
     <%= f.text_field :invoice %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Save', :class => 'btn btn-default' %>
   </div>
 <% end %>

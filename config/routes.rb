@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :grapes
   resources :wines
   resources :contests
   # The priority is based upon order of creation: first created -> highest priority.
