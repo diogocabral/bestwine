@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @wine.name %>
+</p>
+
+<p>
+  <strong>Vivino score:</strong>
+  <%= @wine.vivino_score %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @wine.price %>
+</p>
+
+<p>
+  <strong>Invoice:</strong>
+  <%= @wine.invoice %>
+</p>
+
+<%= link_to 'Edit', edit_wine_path(@wine) %> |
+<%= link_to 'Back', wines_path %>

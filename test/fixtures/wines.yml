@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  vivino_score: 1.5
+  price: 1.5
+  invoice: MyString
+
+two:
+  name: MyString
+  vivino_score: 1.5
+  price: 1.5
+  invoice: MyString
