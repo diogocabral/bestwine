@@ -58,6 +58,9 @@ gem 'pg'
 #authentication
 gem 'devise'
 
+#authorization
+gem 'cancancan', '~> 1.10'
+
 #bootstrap css
 gem 'devise-bootstrap-views'
 gem 'bootstrap-sass', '~> 3.3.6'

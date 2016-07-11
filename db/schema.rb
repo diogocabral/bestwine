@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 20160711111839) do
     t.string   "year"
     t.float    "vivino_score"
     t.float    "price"
-    t.string   "invoice"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

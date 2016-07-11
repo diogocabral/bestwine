@@ -10,12 +10,36 @@
   <%= @contest.starts_in %>
 </p>
 
-<strong>Wines</strong>
-<ul>
-  <% @contest.wines.each do |wine| %>
-    <li><%= wine.name %> - <%= wine.user.email %> <%= link_to 'Show', wine, :class => 'btn btn-default' %></li>
-  <% end %>
-</ul>
+<table class="table table-hover">
+  <thead>
+    <th>Competitor</th>
+    <% if @contest.has_ended? %>
+      <th>Wine</th>
+      <th>Grape</th>
+      <th>Year</th>
+      <th>Vivino Score</th>
+      <th>Price</th>
+      <th>Grade</th>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @contest.wines.each do |wine| %>
+      <tr>
+        <td><%= wine.user.email %></td>
+        <% if @contest.has_ended? %>
+          <td><%= wine.name %></td>
+          <td><%= wine.grape.name %></td>
+          <td><%= wine.year %></td>
+          <td><%= wine.vivino_score %></td>
+          <td><%= wine.price %></td>
+          <td><%= wine.grade %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<%= link_to 'Edit', edit_contest_path(@contest), :class => 'btn btn-default' %>
+<% if can? :update, @contest %>
+  <%= link_to 'Edit', edit_contest_path(@contest), :class => 'btn btn-default' %>
+<% end %>
 <%= link_to 'Back', contests_path, :class => 'btn btn-default' %>

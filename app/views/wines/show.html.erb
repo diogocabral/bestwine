@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Contest:</strong>
+  <%= @wine.contest.name %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @wine.name %>
 </p>
@@ -25,10 +30,5 @@
   <%= @wine.price %>
 </p>
 
-<p>
-  <strong>Invoice:</strong>
-  <%= @wine.invoice %>
-</p>
-
 <%= link_to 'Edit', edit_wine_path(@wine), :class => 'btn btn-default' %>
-<%= link_to 'Back', @wine.contest, :class => 'btn btn-default' %>
+<%= link_to 'Back', contests_path, :class => 'btn btn-default' %>

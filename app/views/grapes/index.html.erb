@@ -15,8 +15,12 @@
       <tr>
         <td><%= grape.name %></td>
         <td><%= link_to 'Show', grape, :class => 'btn btn-default' %></td>
-        <td><%= link_to 'Edit', edit_grape_path(grape), :class => 'btn btn-default' %></td>
-        <td><%= link_to 'Destroy', grape, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default' %></td>
+        <% if can? :update, @grape %>
+          <td><%= link_to 'Edit', edit_grape_path(grape), :class => 'btn btn-default' %></td>
+        <% end %>
+        <% if can? :destroy, @grape %>
+          <td><%= link_to 'Destroy', grape, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default' %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

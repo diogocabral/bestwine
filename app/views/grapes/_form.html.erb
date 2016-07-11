@@ -1,7 +1,7 @@
-<%= form_for(@grape) do |f| %>
+<%= form_for @grape, :html => {:class => 'form-horizontal', :role => 'form'} do |f| %>
   <% if @grape.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@grape.errors.count, "error") %> prohibited this grape from being saved:</h2>
+    <div class="alert alert-danger" role="alert">
+      <strong><%= pluralize(@grape.errors.count, "error") %> prohibited this grape from being saved:</strong>
 
       <ul>
       <% @grape.errors.full_messages.each do |message| %>
@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :class => 'form-control' %>
   </div>
-  <div class="actions">
-    <%= f.submit "Save", :class => 'btn btn-default' %>
-    <%= link_to 'Back', grapes_path, :class => 'btn btn-default' %>
-  </div>
+
+  <%= f.submit "Save", :class => 'btn btn-default' %>
+  <%= link_to 'Back', grapes_path, :class => 'btn btn-default' %>
+  
 <% end %>

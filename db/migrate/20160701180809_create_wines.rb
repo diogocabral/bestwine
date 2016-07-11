@@ -8,7 +8,6 @@ class CreateWines < ActiveRecord::Migration
       t.string :year
       t.float :vivino_score
       t.float :price
-      t.string :invoice
       t.timestamps null: false
     end
   end

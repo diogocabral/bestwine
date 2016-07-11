@@ -1,5 +1,6 @@
 class WinesController < ApplicationController
 
+  # load_and_authorize_resource  
   before_action :authenticate_user!
   before_action :set_wine, only: [:show, :edit, :update, :destroy]
 

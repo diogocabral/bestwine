@@ -5,5 +5,7 @@
   <%= @grape.name %>
 </p>
 
-<%= link_to 'Edit', edit_grape_path(@grape), :class => 'btn btn-default' %>
+<% if can? :update, @grape %>
+  <%= link_to 'Edit', edit_grape_path(@grape), :class => 'btn btn-default' %>
+<% end %>
 <%= link_to 'Back', grapes_path, :class => 'btn btn-default' %>
