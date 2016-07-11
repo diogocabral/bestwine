@@ -30,5 +30,5 @@
   <%= @wine.invoice %>
 </p>
 
-<%= link_to 'Edit', edit_wine_path(@wine) %> |
-<%= link_to 'Back', wines_path %>
+<%= link_to 'Edit', edit_wine_path(@wine), :class => 'btn btn-default' %>
+<%= link_to 'Back', @wine.contest, :class => 'btn btn-default' %>

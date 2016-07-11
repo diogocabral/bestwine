@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+  <%= f.hidden_field :contest_id %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -37,5 +37,6 @@
   </div>
   <div class="actions">
     <%= f.submit 'Save', :class => 'btn btn-default' %>
+    <%= link_to 'Back', contests_path, :class => 'btn btn-default' %>
   </div>
 <% end %>

@@ -55,6 +55,9 @@ end
 #pgsql
 gem 'pg'
 
+#authentication
+gem 'devise'
+
 #bootstrap css
 gem 'devise-bootstrap-views'
 gem 'bootstrap-sass', '~> 3.3.6'

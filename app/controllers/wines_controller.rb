@@ -1,10 +1,12 @@
 class WinesController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_wine, only: [:show, :edit, :update, :destroy]
 
   # GET /wines
   # GET /wines.json
   def index
-    @wines = Wine.all
+    @wines = Wine.where(:contest => params[:contest_id])
   end
 
   # GET /wines/1
@@ -14,7 +16,9 @@ class WinesController < ApplicationController
 
   # GET /wines/new
   def new
+    contest = Contest.find(params[:contest_id])
     @wine = Wine.new
+    @wine.contest = contest
   end
 
   # GET /wines/1/edit
@@ -25,6 +29,8 @@ class WinesController < ApplicationController
   # POST /wines.json
   def create
     @wine = Wine.new(wine_params)
+
+    @wine.user = current_user
 
     respond_to do |format|
       if @wine.save
@@ -69,6 +75,6 @@ class WinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wine_params
-      params.require(:wine).permit(:name, :vivino_score, :price, :year, :invoice, :contest, :grape_id)
+      params.require(:wine).permit(:name, :vivino_score, :price, :year, :invoice, :contest, :grape_id, :contest_id)
     end
 end

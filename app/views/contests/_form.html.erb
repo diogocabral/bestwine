@@ -13,24 +13,22 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => 'form-control' %> 
   </div>
   <div class="field">
     <%= f.label :starts_in %><br>
-    <div class='input-group date' id='datetimepicker'>
-      <%= f.text_field :starts_in, :class => 'form-control' %>
-      <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-      </span>
+    <div class="input-group">
+      <%= f.text_field :starts_in, :class => 'date form-control' %>
     </div>
   </div>
   <div class="actions">
     <%= f.submit 'Salvar', :class => 'btn btn-default' %>
+    <%= link_to 'Back', contests_path, :class => 'btn btn-default' %>
   </div>
 <% end %>
 
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker').datetimepicker();
+        $('.date').datetimepicker();
     });
 </script>

@@ -4,6 +4,8 @@ class Wine < ActiveRecord::Base
 
   belongs_to :grape
 
-  validates_presence_of :name, :grape, :year, :contest, :vivino_score, :price
+  belongs_to :user
+
+  validates_presence_of :name, :grape, :year, :vivino_score, :price, :contest
   
 end

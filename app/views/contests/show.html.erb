@@ -10,5 +10,12 @@
   <%= @contest.starts_in %>
 </p>
 
+<strong>Wines</strong>
+<ul>
+  <% @contest.wines.each do |wine| %>
+    <li><%= wine.name %> - <%= wine.user.email %> <%= link_to 'Show', wine, :class => 'btn btn-default' %></li>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_contest_path(@contest), :class => 'btn btn-default' %>
 <%= link_to 'Back', contests_path, :class => 'btn btn-default' %>

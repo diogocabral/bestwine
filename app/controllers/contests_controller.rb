@@ -1,4 +1,6 @@
 class ContestsController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_contest, only: [:show, :edit, :update, :destroy]
 
   # GET /contests
@@ -25,7 +27,8 @@ class ContestsController < ApplicationController
   # POST /contests.json
   def create
     @contest = Contest.new(contest_params)
-
+    print params
+    print @contest.inspect
     respond_to do |format|
       if @contest.save
         format.html { redirect_to @contest, notice: 'Contest was successfully created.' }
