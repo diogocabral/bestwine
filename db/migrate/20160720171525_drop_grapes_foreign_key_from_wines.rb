@@ -1,4 +1,4 @@
-class DropGrapesForeignKeyFromWine < ActiveRecord::Migration
+class DropGrapesForeignKeyFromWines < ActiveRecord::Migration
   def change
     remove_foreign_key :wines, column: :grape_id
   end
