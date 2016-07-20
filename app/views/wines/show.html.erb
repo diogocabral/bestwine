@@ -11,8 +11,10 @@
 </p>
 
 <p>
-  <strong>Grape:</strong>
-  <%= @wine.grape.name %>
+  <strong>Grapes:</strong>
+  <% @wine.grapes.each do |grape| %>
+    <%= grape.name %>,
+  <% end %>
 </p>
 
 <p>

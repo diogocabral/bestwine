@@ -20,6 +20,7 @@ class WinesController < ApplicationController
     contest = Contest.find(params[:contest_id])
     @wine = Wine.new
     @wine.contest = contest
+    @wine.grapes.build
   end
 
   # GET /wines/1/edit
@@ -32,7 +33,7 @@ class WinesController < ApplicationController
     @wine = Wine.new(wine_params)
 
     @wine.user = current_user
-
+    
     respond_to do |format|
       if @wine.save
         format.html { redirect_to @wine, notice: 'Wine was successfully created.' }
@@ -76,6 +77,6 @@ class WinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wine_params
-      params.require(:wine).permit(:name, :vivino_score, :price, :year, :invoice, :contest, :grape_id, :contest_id)
+      params.require(:wine).permit(:name, :vivino_score, :price, :year, :invoice, :contest, :grape_id, :contest_id, grape_ids: [])
     end
 end

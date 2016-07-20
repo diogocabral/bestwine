@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711111839) do
+ActiveRecord::Schema.define(version: 20160720171624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20160711111839) do
   create_table "wines", force: :cascade do |t|
     t.integer  "contest_id"
     t.integer  "user_id"
-    t.integer  "grape_id"
     t.string   "name"
     t.string   "year"
     t.float    "vivino_score"
@@ -59,7 +58,15 @@ ActiveRecord::Schema.define(version: 20160711111839) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "wines_grapes", force: :cascade do |t|
+    t.integer  "wine_id"
+    t.integer  "grape_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "wines", "contests"
-  add_foreign_key "wines", "grapes"
   add_foreign_key "wines", "users"
+  add_foreign_key "wines_grapes", "grapes"
+  add_foreign_key "wines_grapes", "wines"
 end

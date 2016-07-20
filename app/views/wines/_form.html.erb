@@ -21,8 +21,8 @@
     <%= f.number_field :year, min: Date.today.year - 10, max: Date.today.year, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :grape %>
-    <%= f.collection_select(:grape_id, Grape.order(:name).all, :id, :name, {:prompt => 'Select'}, :class => 'form-control') %>
+    <%= f.label :grape_ids %>
+    <%= f.collection_select(:grape_ids, Grape.order(:name).all, :id, :name, {}, {:multiple => true, :size => 4, :class => 'form-control'}) %>
   </div>
   <div class="form-group">    
     <%= f.label :vivino_score %>
