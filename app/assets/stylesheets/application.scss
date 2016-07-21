@@ -18,7 +18,7 @@
 @import "bootstrap-sprockets";
 
 // Import cerulean variables
-@import "bootswatch/cerulean/variables";
+@import "bootswatch/sandstone/variables";
 
 // Then bootstrap itself
 @import "bootstrap";
@@ -27,6 +27,6 @@
 
 
 // And finally bootswatch style itself
-@import "bootswatch/cerulean/bootswatch";
+@import "bootswatch/sandstone/bootswatch";
 
 @import 'bootstrap-datetimepicker';

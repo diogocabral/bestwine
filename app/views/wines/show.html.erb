@@ -13,7 +13,7 @@
 <p>
   <strong>Grapes:</strong>
   <% @wine.grapes.each do |grape| %>
-    <%= grape.name %>,
+    <%= grape.name %><% if grape != @wine.grapes.last %>, <% end %>
   <% end %>
 </p>
 
@@ -29,7 +29,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @wine.price %>
+  <%= number_to_currency(@wine.price, :unit => 'R$', :separator => ',') %>
 </p>
 
 <%= link_to 'Edit', edit_wine_path(@wine), :class => 'btn btn-default' %>

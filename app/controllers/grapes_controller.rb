@@ -5,13 +5,11 @@ class GrapesController < ApplicationController
   before_action :set_grape, only: [:show, :edit, :update, :destroy]
 
   # GET /grapes
-  # GET /grapes.json
   def index
-    @grapes = Grape.all
+    @grapes = Grape.all.order('name')
   end
 
   # GET /grapes/1
-  # GET /grapes/1.json
   def show
   end
 
@@ -25,43 +23,29 @@ class GrapesController < ApplicationController
   end
 
   # POST /grapes
-  # POST /grapes.json
   def create
     @grape = Grape.new(grape_params)
 
-    respond_to do |format|
-      if @grape.save
-        format.html { redirect_to @grape, notice: 'Grape was successfully created.' }
-        format.json { render :show, status: :created, location: @grape }
-      else
-        format.html { render :new }
-        format.json { render json: @grape.errors, status: :unprocessable_entity }
-      end
+    if @grape.save
+      redirect_to @grape, notice: 'Grape was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /grapes/1
-  # PATCH/PUT /grapes/1.json
   def update
-    respond_to do |format|
-      if @grape.update(grape_params)
-        format.html { redirect_to @grape, notice: 'Grape was successfully updated.' }
-        format.json { render :show, status: :ok, location: @grape }
-      else
-        format.html { render :edit }
-        format.json { render json: @grape.errors, status: :unprocessable_entity }
-      end
+    if @grape.update(grape_params)
+      redirect_to @grape, notice: 'Grape was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /grapes/1
-  # DELETE /grapes/1.json
   def destroy
     @grape.destroy
-    respond_to do |format|
-      format.html { redirect_to grapes_url, notice: 'Grape was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to grapes_url, notice: 'Grape was successfully destroyed.'
   end
 
   private

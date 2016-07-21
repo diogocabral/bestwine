@@ -1,17 +1,22 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :grapes
-  resources :wines
+
+  root to: 'contests#index'
+
   resources :contests
 
   get 'contests/:contest_id/subscribe' => 'wines#new', as: :subscribe
+  post 'contests/:contest_id/subscribe' => 'wines#create'
   get 'contests/:contest_id/wines' => 'wines#index', as: :contest_wines
 
-  # post 'wines' => 'wines#create', as: :wines
-  # get 'wines/:id' => 'wines#show', as: :wine
-  # get 'wines/:id/edit' => 'wines#edit', as: :edit_wine
+  resources :grapes
+  
+  devise_for :users
+  
+  get 'wines/:id' => 'wines#show', as: :wine
+  get 'wines/:id/edit' => 'wines#edit', as: :edit_wine
+  patch 'wines/:id' => 'wines#update'
+  get 'wines/:id/edit' => 'wines#edit'
 
-  root to: 'contests#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

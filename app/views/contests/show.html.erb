@@ -7,7 +7,7 @@
 
 <p>
   <strong>Starts In:</strong>
-  <%= @contest.starts_in %>
+  <%= @contest.starts_in.strftime("%d/%m/%Y - %H:%M") %>
 </p>
 
 <table class="table table-hover">
@@ -31,7 +31,7 @@
           <td><%= wine.grape.name %></td>
           <td><%= wine.year %></td>
           <td><%= wine.vivino_score %></td>
-          <td><%= wine.price %></td>
+          <td><%= number_to_currency(wine.price, :unit => 'R$', :separator => ',') %></td>
           <td><%= wine.grade %></td>
         <% end %>
       </tr>

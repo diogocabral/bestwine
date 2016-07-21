@@ -25,5 +25,7 @@
     <% end %>
   </tbody>
 </table>
+<% if can? :create, Grape.new %>
+  <%= link_to 'New Grape', new_grape_path, :class => 'btn btn-default' %>
+<% end %>
 
-<%= link_to 'New Grape', new_grape_path, :class => 'btn btn-default' %>

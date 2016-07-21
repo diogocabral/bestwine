@@ -13,6 +13,8 @@ class Wine < ActiveRecord::Base
 
   validates_numericality_of :price, :vivino_score
 
+  validates_inclusion_of :vivino_score, in: 0..5
+
   accepts_nested_attributes_for :grapes
 
   def grade

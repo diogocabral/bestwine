@@ -4,69 +4,71 @@ class WinesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_wine, only: [:show, :edit, :update, :destroy]
 
-  # GET /wines
-  # GET /wines.json
-  def index
-    @wines = Wine.where(:contest => params[:contest_id])
-  end
-
   # GET /wines/1
-  # GET /wines/1.json
   def show
+    if current_user != @wine.user
+      redirect_to contests_path, notice: 'Forbidden.' and return
+    end
   end
 
-  # GET /wines/new
-  def new
-    contest = Contest.find(params[:contest_id])
+  # GET /contest/1/subscribe
+  def new    
+    @contest = Contest.find(params[:contest_id])
+
+    if current_user.has_subscribed(@contest)
+      redirect_to contests_path, notice: 'You have already subscribed for this contest.' and return
+    end
+
     @wine = Wine.new
-    @wine.contest = contest
-    @wine.grapes.build
+
+    render :subscribe
   end
 
   # GET /wines/1/edit
   def edit
+    if current_user != @wine.user
+      redirect_to contests_path, notice: 'Forbidden.' and return
+    end
   end
 
-  # POST /wines
-  # POST /wines.json
+  # POST /contest/1/subscribe
   def create
-    @wine = Wine.new(wine_params)
+    contest = Contest.find(params[:contest_id])
 
-    @wine.user = current_user
+    @wine = Wine.new(wine_params)
     
-    respond_to do |format|
-      if @wine.save
-        format.html { redirect_to @wine, notice: 'Wine was successfully created.' }
-        format.json { render :show, status: :created, location: @wine }
-      else
-        format.html { render :new }
-        format.json { render json: @wine.errors, status: :unprocessable_entity }
-      end
+    @wine.user = current_user
+    @wine.contest = contest
+    
+    if @wine.save
+      redirect_to contest, notice: 'Wine was successfully created.'
+    else
+      @contest = contest
+      render :subscribe
     end
   end
 
   # PATCH/PUT /wines/1
-  # PATCH/PUT /wines/1.json
   def update
-    respond_to do |format|
-      if @wine.update(wine_params)
-        format.html { redirect_to @wine, notice: 'Wine was successfully updated.' }
-        format.json { render :show, status: :ok, location: @wine }
-      else
-        format.html { render :edit }
-        format.json { render json: @wine.errors, status: :unprocessable_entity }
-      end
+    if current_user != @wine.user
+      redirect_to contests_path, notice: 'Forbidden.' and return
+    end
+
+    if @wine.update(wine_params)
+      redirect_to @wine, notice: 'Wine was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /wines/1
-  # DELETE /wines/1.json
   def destroy
-    @wine.destroy
-    respond_to do |format|
-      format.html { redirect_to wines_url, notice: 'Wine was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user != @wine.user
+      redirect_to contests_path, notice: 'Forbidden.' and return
     end
+
+    @wine.destroy
+    redirect_to wines_url, notice: 'Wine was successfully destroyed.'
   end
 
   private
