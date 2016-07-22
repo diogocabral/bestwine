@@ -9,7 +9,7 @@ class Contest < ActiveRecord::Base
   def winner
     if has_ended?
       wines.sort_by {|wine| wine.grade}
-      return wines.last
+      return wines.first
     end
   end
   

@@ -26,7 +26,7 @@ class WinesController < ApplicationController
 
   # GET /wines/1/edit
   def edit
-    if current_user != @wine.user
+    if current_user != @wine.user or @wine.contest.has_ended?
       redirect_to contests_path, notice: 'Forbidden.' and return
     end
   end
@@ -50,7 +50,7 @@ class WinesController < ApplicationController
 
   # PATCH/PUT /wines/1
   def update
-    if current_user != @wine.user
+    if current_user != @wine.user or @wine.contest.has_ended?
       redirect_to contests_path, notice: 'Forbidden.' and return
     end
 

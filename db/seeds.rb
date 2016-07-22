@@ -10,7 +10,8 @@ User.find_or_create_by!(email: 'user@example.com') do |user|
   user.password_confirmation = 'changeme'
 end
 
-Contest.create(name: 'X BestWine (Sunny)', starts_in: '2016-07-23 20:00:00 UTC')
+Contest.create(name: 'I BestWine', starts_in: '2016-07-01 20:00:00 UTC')
+Contest.create(name: 'V BestWine (Sunny)', starts_in: '2016-07-23 20:00:00 UTC')
 
 Grape.create(name: 'Agiorgitiko')
 Grape.create(name: 'Aglianico')

@@ -17,12 +17,10 @@
         <td><%= contest.name %></td>
         <td><%= contest.starts_in.strftime("%d/%m/%Y - %H:%M") %></td>
         <td>
-          <% if contest.has_ended? %>
-            <%= link_to 'Winner', contest.winner, :class => 'btn btn-default' %>
+          <% if current_user.has_subscribed(contest) %>
+            <%= link_to 'My Wine', current_user.subscribed_wine(contest), :class => 'btn btn-default' %>
           <% else %>
-            <% if current_user.has_subscribed(contest) %>
-              <%= link_to 'My Wine', current_user.subscribed_wine(contest), :class => 'btn btn-default' %>
-            <% else %>
+            <% if !contest.has_ended? %>
               <%= link_to 'Subscribe', subscribe_path(contest), :class => 'btn btn-default' %>
             <% end %>
           <% end %>

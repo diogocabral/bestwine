@@ -15,7 +15,7 @@
     <th>Competitor</th>
     <% if @contest.has_ended? %>
       <th>Wine</th>
-      <th>Grape</th>
+      <th>Grapes</th>
       <th>Year</th>
       <th>Vivino Score</th>
       <th>Price</th>
@@ -23,12 +23,16 @@
     <% end %>
   </thead>
   <tbody>
-    <% @contest.wines.each do |wine| %>
+    <% @contest.wines.sort_by { |wine| !wine.grade }.each do |wine| %>
       <tr>
         <td><%= wine.user.email %></td>
         <% if @contest.has_ended? %>
           <td><%= wine.name %></td>
-          <td><%= wine.grape.name %></td>
+          <td>
+            <% wine.grapes.each do |grape| %>
+              <%= grape.name %><% if grape != wine.grapes.last %>, <% end %>
+            <% end %>
+          </td>
           <td><%= wine.year %></td>
           <td><%= wine.vivino_score %></td>
           <td><%= number_to_currency(wine.price, :unit => 'R$', :separator => ',') %></td>
