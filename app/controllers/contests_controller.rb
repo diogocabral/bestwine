@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
 
-  # load_and_authorize_resource
+  load_and_authorize_resource #:through => :current_user
   before_action :authenticate_user!
   before_action :set_contest, only: [:show, :edit, :update, :destroy]
 
@@ -39,6 +39,18 @@ class ContestsController < ApplicationController
       redirect_to @contest, notice: 'Contest was successfully updated.'
     else
       render :edit
+    end
+  end
+
+  # GET /contests/1/unsubscribe
+  def unsubscribe
+    wine = current_user.subscribed_wine(@contest)
+
+    if wine != nil
+      wine.destroy
+      redirect_to contests_url, notice: 'Wine was successfully unsubscribed.'
+    else
+      redirect_to contests_url, notice: 'No wine subscribed.'
     end
   end
 

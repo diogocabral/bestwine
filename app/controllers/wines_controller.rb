@@ -1,19 +1,20 @@
 class WinesController < ApplicationController
 
-  # load_and_authorize_resource  
   before_action :authenticate_user!
+  load_and_authorize_resource #:through => :current_user
   before_action :set_wine, only: [:show, :edit, :update, :destroy]
 
   # GET /wines/1
   def show
-    if current_user != @wine.user
-      redirect_to contests_path, notice: 'Forbidden.' and return
-    end
   end
 
   # GET /contest/1/subscribe
   def new    
     @contest = Contest.find(params[:contest_id])
+
+    if @contest.has_ended?
+      redirect_to contests_path, notice: 'This contest has ended.' and return
+    end
 
     if current_user.has_subscribed(@contest)
       redirect_to contests_path, notice: 'You have already subscribed for this contest.' and return
@@ -26,8 +27,8 @@ class WinesController < ApplicationController
 
   # GET /wines/1/edit
   def edit
-    if current_user != @wine.user or @wine.contest.has_ended?
-      redirect_to contests_path, notice: 'Forbidden.' and return
+    if @wine.contest.has_ended?
+      redirect_to contests_path, notice: 'This contest has ended.' and return
     end
   end
 
@@ -50,8 +51,8 @@ class WinesController < ApplicationController
 
   # PATCH/PUT /wines/1
   def update
-    if current_user != @wine.user or @wine.contest.has_ended?
-      redirect_to contests_path, notice: 'Forbidden.' and return
+    if @wine.contest.has_ended?
+      redirect_to contests_path, notice: 'This contest has ended.' and return
     end
 
     if @wine.update(wine_params)
@@ -59,16 +60,6 @@ class WinesController < ApplicationController
     else
       render :edit
     end
-  end
-
-  # DELETE /wines/1
-  def destroy
-    if current_user != @wine.user
-      redirect_to contests_path, notice: 'Forbidden.' and return
-    end
-
-    @wine.destroy
-    redirect_to wines_url, notice: 'Wine was successfully destroyed.'
   end
 
   private

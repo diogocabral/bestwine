@@ -19,6 +19,7 @@
         <td>
           <% if current_user.has_subscribed(contest) %>
             <%= link_to 'My Wine', current_user.subscribed_wine(contest), :class => 'btn btn-default' %>
+            <%= link_to 'Unsubscribe', unsubscribe_path(contest), data: { confirm: 'Are you sure?' }, :class => 'btn btn-default' %>
           <% else %>
             <% if !contest.has_ended? %>
               <%= link_to 'Subscribe', subscribe_path(contest), :class => 'btn btn-default' %>

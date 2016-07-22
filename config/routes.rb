@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'contests/:contest_id/subscribe' => 'wines#new', as: :subscribe
   post 'contests/:contest_id/subscribe' => 'wines#create'
+  get 'contests/:id/unsubscribe' => 'contests#unsubscribe', as: :unsubscribe
   get 'contests/:contest_id/wines' => 'wines#index', as: :contest_wines
 
   resources :grapes

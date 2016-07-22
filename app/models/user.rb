@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
 
   has_many :wines
 
+  has_and_belongs_to_many :roles 
+
+  def role?(role) 
+    !roles.find_by_name(role.to_s.camelize).nil?
+  end 
+
   def has_subscribed(contest)
     index = wines.index { |wine| wine.contest == contest }
     !index.nil?
