@@ -24,7 +24,7 @@
   </thead>
   <tbody>
     <% @contest.wines.sort_by { |wine| !wine.grade }.each do |wine| %>
-      <tr>
+      <tr <% if @contest.has_ended? %>class="result"<% end %>>
         <td><%= wine.user.email %></td>
         <% if @contest.has_ended? %>
           <td><%= wine.name %></td>
@@ -46,4 +46,5 @@
 <% if can? :update, @contest %>
   <%= link_to 'Edit', edit_contest_path(@contest), :class => 'btn btn-default' %>
 <% end %>
+<%= link_to 'Show All', '#', :onclick => 'showAllResults();', :class => 'btn btn-default' %>
 <%= link_to 'Back', contests_path, :class => 'btn btn-default' %>
