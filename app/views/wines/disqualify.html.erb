@@ -1,0 +1,63 @@
+<h1>Disqualify Wine</h1>
+
+<%= form_for @wine, method: :patch, :url => disqualify_path(@wine), :html => {:class => 'form-horizontal', :role => 'form'} do |f| %>
+  <% if @wine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@wine.errors.count, "error") %> prohibited this wine from being saved:</h2>
+
+      <ul>
+      <% @wine.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <strong>Contest:</strong>
+    <%= @wine.contest.name %>
+  </p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @wine.name %>
+  </p>
+
+  <p>
+    <strong>Grapes:</strong>
+    <% @wine.grapes.each do |grape| %>
+      <%= grape.name %><% if grape != @wine.grapes.last %>, <% end %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Year:</strong>
+    <%= @wine.year %>
+  </p>
+
+  <p>
+    <strong>Vivino Score:</strong>
+    <%= @wine.vivino_score %>
+  </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= number_to_currency(@wine.price, :unit => 'R$', :separator => ',') %>
+  </p>
+
+  <p>
+    <strong>Grade:</strong>
+    <%= @wine.grade %>
+  </p>
+
+  <p>
+    <strong>Disqualification Comments:</strong>
+  </p>
+  <%= f.hidden_field :disqualified, :value => true %>
+  <%= f.text_area :comments, cols: 50, rows: 6 %>
+  <br />
+
+  <%= f.submit 'Disqualify', :class => 'btn btn-default' %>
+  <%= link_to 'Back', @wine.contest, :class => 'btn btn-default' %>
+
+<% end %>

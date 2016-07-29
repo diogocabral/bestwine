@@ -20,10 +20,11 @@
       <th>Vivino Score</th>
       <th>Price</th>
       <th>Grade</th>
+      <th></th>
     <% end %>
   </thead>
   <tbody>
-    <% @contest.wines.sort_by { |wine| !wine.grade }.each do |wine| %>
+    <% @contest.wines.each do |wine| %>
       <tr <% if @contest.has_ended? %>class="result"<% end %>>
         <td><%= wine.user.email %></td>
         <% if @contest.has_ended? %>
@@ -37,6 +38,13 @@
           <td><%= wine.vivino_score %></td>
           <td><%= number_to_currency(wine.price, :unit => 'R$', :separator => ',') %></td>
           <td><%= wine.grade %></td>
+        <% end %>
+        <% if wine.disqualified? %>
+          <td>Disqualified</td>
+        <% else %>
+          <% if can? :disqualify, wine %>
+            <td><%= link_to 'Disqualify', disqualify_path(wine), :class => 'btn btn-default' %></td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>

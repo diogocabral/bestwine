@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get 'wines/:id/edit' => 'wines#edit', as: :edit_wine
   patch 'wines/:id' => 'wines#update'
   get 'wines/:id/edit' => 'wines#edit'
+  get 'wines/:id/disqualify' => 'wines#show_disqualify_form', as: :disqualify
+  patch 'wines/:id/disqualify' => 'wines#disqualify'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

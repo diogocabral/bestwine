@@ -17,8 +17,16 @@ class Wine < ActiveRecord::Base
 
   accepts_nested_attributes_for :grapes
 
+  def init
+    self.disqualified  ||= false
+  end
+
   def grade
     (vivino_score * vivino_score)/price
+  end
+
+  def disqualified?
+    disqualified
   end
   
 end

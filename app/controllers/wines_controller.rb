@@ -2,7 +2,7 @@ class WinesController < ApplicationController
 
   before_action :authenticate_user!
   load_and_authorize_resource #:through => :current_user
-  before_action :set_wine, only: [:show, :edit, :update, :destroy]
+  before_action :set_wine, only: [:show, :edit, :update, :destroy, :show_disqualify_form, :disqualify]
 
   # GET /wines/1
   def show
@@ -30,6 +30,17 @@ class WinesController < ApplicationController
     if @wine.contest.has_ended?
       redirect_to contests_path, notice: 'This contest has ended.' and return
     end
+  end
+
+  # GET /wines/1/disqualify
+  def show_disqualify_form
+    render 'disqualify'
+  end
+
+  # PATCH/PUT /wines/1/disqualify
+  def disqualify
+    @wine.update(wine_params)
+    redirect_to @wine.contest, notice: 'Wine successfully disqualified.'
   end
 
   # POST /contest/1/subscribe
@@ -70,6 +81,6 @@ class WinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wine_params
-      params.require(:wine).permit(:name, :vivino_score, :price, :year, :invoice, :contest, :grape_id, :contest_id, grape_ids: [])
+      params.require(:wine).permit(:name, :comments, :disqualified, :vivino_score, :price, :year, :invoice, :contest, :grape_id, :contest_id, grape_ids: [])
     end
 end
