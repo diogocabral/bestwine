@@ -16,4 +16,6 @@
 //= require moment
 //= require moment/pt-br
 //= require bootstrap-datetimepicker
+//= require bootstrap/bootstrap-rails-tooltip
+//= require bootstrap/bootstrap-rails-popover
 //= require_tree .

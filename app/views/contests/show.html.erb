@@ -40,7 +40,7 @@
           <td><%= wine.grade %></td>
         <% end %>
         <% if wine.disqualified? %>
-          <td>Disqualified</td>
+          <td class="has-popover" data-toggle="popover" data-placement="left" data-content="<%= wine.comments %>">Disqualified</td>
         <% else %>
           <% if can? :disqualify, wine %>
             <td><%= link_to 'Disqualify', disqualify_path(wine), :class => 'btn btn-default' %></td>

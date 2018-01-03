@@ -15,7 +15,9 @@ class Ability
             wine.user == user
         end
         can :read, Contest
-        can :unsubscribe, Contest
+        can :unsubscribe, Contest do |contest|
+            contest.starts_in > Date.current
+        end
         can :read, Grape
     end
     # Define abilities for the passed in user here. For example:

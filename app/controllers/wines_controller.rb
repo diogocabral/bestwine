@@ -47,6 +47,10 @@ class WinesController < ApplicationController
   def create
     contest = Contest.find(params[:contest_id])
 
+    if contest.has_ended?
+      redirect_to contests_path, notice: 'This contest has ended.' and return
+    end
+
     @wine = Wine.new(wine_params)
     
     @wine.user = current_user

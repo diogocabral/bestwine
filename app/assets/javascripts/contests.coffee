@@ -13,7 +13,11 @@ showResults = ->
   $('.result').stop(true, true)
   $('.result').show()
 
+@initPopover = ->
+  $('.has-popover').popover({trigger: 'hover'})
+
 ready = ->
+  initPopover()
   showResults()
 
 $(document).ready(ready)
