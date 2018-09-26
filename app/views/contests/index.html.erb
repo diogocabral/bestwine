@@ -2,41 +2,87 @@
 
 <h1>Listing Contests</h1>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Starts In</th>
-      <th></th>
-    </tr>
-  </thead>
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="#">New Contests</a></li>
+  <li role="presentation"><a href="#">Old Contests</a></li>
+</ul>
 
-  <tbody>
-    <% @contests.each do |contest| %>
-      <tr>
-        <td><%= contest.name %></td>
-        <td><%= contest.starts_in.strftime("%d/%m/%Y - %H:%M") %></td>
-        <td>
-          <% if current_user.has_subscribed(contest) %>
-            <%= link_to 'My Wine', current_user.subscribed_wine(contest), :class => 'btn btn-default' %>
-            <%= link_to 'Unsubscribe', unsubscribe_path(contest), data: { confirm: 'Are you sure?' }, :class => 'btn btn-default' %>
-          <% else %>
-            <% if !contest.has_ended? %>
-              <%= link_to 'Subscribe', subscribe_path(contest), :class => 'btn btn-default' %>
-            <% end %>
-          <% end %>
-          <%= link_to 'Competitors', contest, :class => 'btn btn-default' %>
-          <% if can? :update, @contest %>
-            <%= link_to 'Edit', edit_contest_path(contest), :class => 'btn btn-default' %>
-          <% end %>
-          <% if can? :destroy, @contest %>
-            <%= link_to 'Destroy', contest, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default' %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="tab-content">
+  <div class="tab-pane fade in active">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Starts In</th>
+          <th></th> 
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @new_contests.each do |contest| %>
+          <tr>
+            <td><%= contest.name %></td>
+            <td><%= contest.starts_in.strftime("%d/%m/%Y - %H:%M") %></td>
+            <td>
+              <% if current_user.has_subscribed(contest) %>
+                <%= link_to 'My Wine', current_user.subscribed_wine(contest), :class => 'btn btn-default' %>
+                <%= link_to 'Unsubscribe', unsubscribe_path(contest), data: { confirm: 'Are you sure?' }, :class => 'btn btn-default' %>
+              <% else %>
+                <% if !contest.has_ended? %>                
+                  <%= link_to 'Subscribe', subscribe_path(contest), :class => 'btn btn-default' %>
+                <% end %>
+              <% end %>
+              <%= link_to 'Competitors', contest, :class => 'btn btn-default' %>
+              <% if can? :update, @contest %>
+                <%= link_to 'Edit', edit_contest_path(contest), :class => 'btn btn-default' %>
+              <% end %>
+              <% if can? :destroy, @contest %>
+                <%= link_to 'Destroy', contest, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div id="old" class="tab-pane fade">
+    <table id="old" class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Starts In</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @old_contests.each do |contest| %>
+          <tr>
+            <td><%= contest.name %></td>
+            <td><%= contest.starts_in.strftime("%d/%m/%Y - %H:%M") %></td>
+            <td>
+              <% if current_user.has_subscribed(contest) %>
+                <%= link_to 'My Wine', current_user.subscribed_wine(contest), :class => 'btn btn-default' %>
+              <% else %>
+              <% if !contest.has_ended? %>
+                <%= link_to 'Unsubscribe', unsubscribe_path(contest), data: { confirm: 'Are you sure?' }, :class => 'btn btn-default' %>
+                  <%= link_to 'Subscribe', subscribe_path(contest), :class => 'btn btn-default' %>
+                <% end %>
+              <% end %>
+              <%= link_to 'Competitors', contest, :class => 'btn btn-default' %>
+              <% if can? :update, @contest %>
+                <%= link_to 'Edit', edit_contest_path(contest), :class => 'btn btn-default' %>
+              <% end %>
+              <% if can? :destroy, @contest %>
+                <%= link_to 'Destroy', contest, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <% if can? :create, Contest.new %>
   <%= link_to 'New Contest', new_contest_path, :class => 'btn btn-default' %>

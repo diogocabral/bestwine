@@ -6,7 +6,8 @@ class ContestsController < ApplicationController
 
   # GET /contests
   def index
-    @contests = Contest.all.order('name')
+    @new_contests = Contest.active_contests
+    @old_contests = Contest.inactive_contests
   end
 
   # GET /contests/1

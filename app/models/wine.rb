@@ -18,7 +18,7 @@ class Wine < ActiveRecord::Base
   accepts_nested_attributes_for :grapes
 
   def init
-    self.disqualified  ||= false
+    self.disqualified ||= false
   end
 
   def grade

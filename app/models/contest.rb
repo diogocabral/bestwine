@@ -1,5 +1,7 @@
 class Contest < ActiveRecord::Base
 
+  scope :active_contests, -> { where('starts_in > current_timestamp') }
+  scope :inactive_contests, -> { where('starts_in < current_timestamp') }
   has_many :wines
 
   validates_presence_of :name, :starts_in
