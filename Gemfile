@@ -53,10 +53,11 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rails-console'
   gem 'capistrano-rvm'
+  gem 'capistrano-nvm'
 end
 
 #pgsql
-gem 'pg'
+gem 'pg', '~> 0.21.0'
 
 #authentication
 gem 'devise'
